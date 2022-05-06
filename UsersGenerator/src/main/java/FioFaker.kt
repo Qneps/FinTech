@@ -11,11 +11,13 @@ class FioFaker() {
     private fun getGender(): String{
         return arrayOf("male", "female").random()
     }
+    fun getGenderKir() =
+            when (gender) {
+                "male" -> "МУЖ"
+                "female" -> "ЖЕН"
+                else -> "ОНО"
+            }
 
-    //TODO дописать
-    fun getGenderKiril(gender: String){
-
-    }
 
     fun getFirstName(): String {
         val fioMap = getFioMapFromFile(gender)
@@ -36,7 +38,7 @@ class FioFaker() {
                 BufferedReader(InputStreamReader(resource!!, StandardCharsets.UTF_8)).lines().toList()
             }
         } catch (e: Exception) {
-            throw IOException("������ ������ ����� $fioFileName")
+            throw IOException("Не удалось прочитать файл $fioFileName")
         }
         val fioMap = HashMap<String, String>()
         lines.map {

@@ -6,25 +6,25 @@ class UserGenerator {
     fun getUser(): Map<String, String> {
         val faker = Faker(Locale("RU"))
         val now  = Date()
-        val fio = FioFaker() // ФИО + пол
-        val userAge = DiffYears() // Возраст
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy") // Форматирование даты
-        val birthday: Date =  faker.date().birthday() // Дата Рождения
+        val fio = FioFaker()
+        val userAge = DiffYears()
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val birthday: Date =  faker.date().birthday()
         return mapOf(
-            "firstname" to fio.getFirstName(), // Имя
-            "lastName" to fio.getLastName(), // Фамилия
-            "middleName" to fio.getMiddleName(), //Отчество
-            "age" to userAge.getDiffYears(birthday, now).toString(), //Возраст
-            "gender" to "male", //Пол
-            "birthDay" to dateFormat.format(birthday), // // Дата Рождения
-            "placeOfBirth" to faker.address().city(), // Место рождения
-            "zipCode" to faker.address().zipCode(), // Индекс
-            "country" to faker.address().country(), //Страна
-            "area" to "",
-            "city" to faker.address().cityName(), // Город
-            "street" to faker.address().streetName(), // Улица
-            "house" to faker.address().streetAddressNumber(), // Номер Дома
-            "apartment" to faker.address().secondaryAddress() // номер Квартиры
+                "Имя" to fio.getFirstName(),
+                "Фамилия" to fio.getLastName(),
+                "Отчество" to fio.getMiddleName(),
+                "Возраст" to userAge.getDiffYears(birthday, now).toString(),
+                "Пол" to fio.getGenderKir(),
+                "Дата рождения" to dateFormat.format(birthday),
+                "Место рождения" to faker.address().city(),
+                "Индекс" to faker.address().zipCode(),
+                "Страна" to faker.address().country(),
+                "Область" to faker.address().state(),
+                "Город" to faker.address().cityName(),
+                "Улица" to faker.address().streetName(),
+                "Дом" to faker.address().streetAddressNumber(),
+                "Квартира" to faker.address().secondaryAddress()
         )
     }
 }

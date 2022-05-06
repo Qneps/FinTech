@@ -7,30 +7,39 @@ import com.itextpdf.text.pdf.PdfPCell
 import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
 import java.io.FileOutputStream
+import java.net.URL
+import java.nio.file.Paths
 
 
 object Table {
         @JvmStatic
         fun main(args: Array<String>) {
-
-            val document = Document(PageSize.A4.rotate())
-            val baseFont = BaseFont.createFont("arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
-            val font = Font(baseFont, 10f, Font.NORMAL)
-            val colWidths = floatArrayOf(2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 1f, 1f)
-
+            val fileName = "Peoples.pdf"
             try {
+                val document = Document(PageSize.A4.rotate(),0f, 0f, 20f, 0f)
+                val baseFont = BaseFont.createFont("arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+                val font = Font(baseFont, 7f, Font.NORMAL)
+                val columnWidths = floatArrayOf(3f, 4f, 5f, 3f, 3f, 4f, 5f, 3f, 5f, 7f, 5f, 6f, 3f, 3f)
                 PdfWriter.getInstance(document,
-                        FileOutputStream("Peoples.pdf"))
+                        FileOutputStream(fileName))
                 document.open()
 
                 val paragraph = Paragraph()
-                val table = PdfPTable(colWidths) // столбцы
-
+                val table = PdfPTable(columnWidths)
+                table.setWidthPercentage(95f);
+                var userData: Map<String, String>
                 for (i in 0..10) {
-                    val user = UserGenerator().getUser()
-                    for (key in user) {
-                        val cell = PdfPCell(Paragraph(key.value, font))
-                        table.addCell(cell)
+                    userData = UserGenerator().getUser()
+                    if (i == 0) {
+                        for (user in userData) {
+                            val cell = PdfPCell(Paragraph(user.key, font))
+                            table.addCell(cell)
+                        }
+                    } else {
+                        for (user in userData) {
+                            val cell = PdfPCell(Paragraph(user.value, font))
+                            table.addCell(cell)
+                        }
                     }
                 }
 
@@ -39,6 +48,11 @@ object Table {
 
 
                 document.close()
+                val resource: URL = FioFaker::class.java.getResource("")
+                var path = Paths.get(resource.toURI()).toAbsolutePath().toString()
+                path = path.substring(0, path.length - 14) + fileName
+                println("Файл создан. Путь:$path")
+                // Простите за костыль, это лучшее, что я смог сделать, изучая Kotlin и java всего 2 недели :)
             } catch (e: Exception) {
                 println(e)
             }
