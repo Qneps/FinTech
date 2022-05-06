@@ -9,13 +9,21 @@ import com.itextpdf.text.pdf.PdfWriter
 import java.io.FileOutputStream
 import java.net.URL
 import java.nio.file.Paths
+import java.util.*
 
 
 object Table {
         @JvmStatic
         fun main(args: Array<String>) {
             val fileName = "Peoples.pdf"
+            val reader = Scanner(System.`in`)
+            print("Введите количество пользователей: ")
             try {
+                val n: Int = reader.nextInt()
+                if(n !in 1..30){
+                    throw IllegalArgumentException("Значение должно быть в пределах от 1 до 30: " +
+                            "$n")
+                }
                 val document = Document(PageSize.A4.rotate(),0f, 0f, 20f, 0f)
                 val baseFont = BaseFont.createFont("arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
                 val font = Font(baseFont, 7f, Font.NORMAL)
@@ -28,7 +36,7 @@ object Table {
                 val table = PdfPTable(columnWidths)
                 table.setWidthPercentage(95f);
                 var userData: Map<String, String>
-                for (i in 0..10) {
+                for (i in 0..n) {
                     userData = UserGenerator().getUser()
                     if (i == 0) {
                         for (user in userData) {
