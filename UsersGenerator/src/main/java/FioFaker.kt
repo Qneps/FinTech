@@ -2,6 +2,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
+import kotlin.streams.toList
 import java.util.*
 
 class FioFaker() {
