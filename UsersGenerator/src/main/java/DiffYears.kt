@@ -1,6 +1,6 @@
 import java.util.*
 
-class UserAge {
+class DiffYears {
     fun getCalendar(date: Date?): Calendar {
         val cal = Calendar.getInstance(Locale.US)
         cal.time = date
