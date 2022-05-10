@@ -11,8 +11,7 @@ class Seasons {
                 return "Winter"
         }
         else
-            throw IllegalArgumentException("Значение должно быть в пределах от 1 до 12: " +
-                    "$n")
+            throw IllegalArgumentException("Значение должно быть в пределах от 1 до 12: $n")
     }
 
 }
