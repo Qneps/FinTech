@@ -1,15 +1,14 @@
 class Seasons {
     fun getSeason(n: Int): String {
         if(n in 1..12){
-            val season: String
-            if (n in 3..5)
-                season = "Spring"
-            else if  (n in 6..8)
-                season = "Summer"
-            else if(n in 9..11)
-                season = "Autumn"
-            else
-                season = "Winter"
+            val season = if (n in 3..5)
+                            "Spring"
+                        else if  (n in 6..8)
+                            "Summer"
+                        else if(n in 9..11)
+                            "Autumn"
+                        else
+                            "Winter"
             println(season)
             return season
         }

@@ -7,7 +7,7 @@ import java.math.BigInteger
 class TestFactorial {
     @ParameterizedTest
     @CsvSource(
-        "0", "-1", "101"
+        "-1", "101"
     )
     fun testNegativeFactorial(f: Int) {
         val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
@@ -16,10 +16,13 @@ class TestFactorial {
         Assertions.assertEquals("Значение должно быть в пределах от 1 до 100: $f", exception.message)
     }
 
-    @Test
-    fun testPositiveOne() {
+    @ParameterizedTest
+    @CsvSource(
+        "0", "1"
+    )
+    fun testPositiveOne(f: Int) {
         val expected =  BigInteger.valueOf(1)
-        Assertions.assertEquals(expected, Factorial().getFactorial(1))
+        Assertions.assertEquals(expected, Factorial().getFactorial(f))
     }
 
     @Test

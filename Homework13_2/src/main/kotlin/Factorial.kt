@@ -3,7 +3,7 @@ import java.math.BigInteger
 
 class Factorial {
     fun getFactorial(f: Int): BigInteger? {
-        if(f in 1..100)
+        if(f in 0..100)
           return calculationFactorial(f)
         else
             throw IllegalArgumentException("Значение должно быть в пределах от 1 до 100: $f")
